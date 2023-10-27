@@ -1,0 +1,20 @@
+.loading {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.loadingLogo {
+  animation-duration: 1.5s;
+  animation-name: spinner;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  display: inline-block;
+  width: 250px;
+  height: 250px;
+}
+
+@keyframes spinner {
+  100% {
+    transform: rotate(360deg);
+  }
+}

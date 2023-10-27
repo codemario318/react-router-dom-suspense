@@ -8,5 +8,10 @@ export default defineConfig({
       scopeBehaviour: 'local',
       localsConvention: 'camelCaseOnly'
     }
+  },
+  server: {
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
   }
 })
