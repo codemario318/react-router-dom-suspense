@@ -1,14 +1,25 @@
 import { LoaderFunctionArgs } from "react-router-dom";
-import { requestSearchBooks, Channel } from '../utils/requests';
+import { requestSearchBooks } from '../utils/requests';
+import { SearchBookResponse, SearchBookOption, Book, BookItem } from '../types/search-book';
 
-export async function booksLoader({ request }: LoaderFunctionArgs): Promise<{ channel: Channel; }> {
+export async function booksLoader({ request }: LoaderFunctionArgs): Promise<{ total: number, books: Book[] }> {
   const url = new URL(request.url);
 
-  const query: string = url.searchParams.get("query") ?? '';
-  const display: number = Number.parseInt(url.searchParams.get('display') ?? '10');
-  const sort: string = url.searchParams.get('sort') ?? 'sim';
+  if (!url.searchParams.has('query')) {
+    return { total: 0, books: [] };
+  }
 
-  const channel: Channel = await requestSearchBooks({ query, display, sort });
+  const options: SearchBookOption = new SearchBookOption({
+    query: url.searchParams.get("query") ?? '개발',
+    display: parseInt(url.searchParams.get('display') ?? '10'),
+    start: parseInt(url.searchParams.get('start') ?? '1'),
+    sort: url.searchParams.get('sort') ?? 'sim',
+  });
 
-  return { channel };
+  const searchBookResponse: SearchBookResponse = await requestSearchBooks(options);
+
+  return {
+    total: searchBookResponse.total,
+    books: searchBookResponse.items.map((book: BookItem) => new Book(book))
+  };
 }

@@ -22,14 +22,19 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  justify-content: flex-start;
+}
+
+.bookList::after {
+  content: '';
+  display: block;
+  clear: both;
 }
 
 .bookListItem {
   box-sizing: border-box;
+  float: left;
+  width: 462.5px;
   margin: 25px 0 0 25px;
-  width: 200px;
 }
 
 .bookLink {
@@ -49,8 +54,6 @@
 }
 
 .bookThumb {
-  width: 200px;
-  height: 200px;
   background-color: #f8f8f8;
 }
 
@@ -60,6 +63,7 @@
 
 .bookThumbImg {
   width: 100%;
+  height: 600px;
 }
 
 .price {
