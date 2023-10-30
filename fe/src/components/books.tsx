@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import { useLoaderData } from "react-router-dom";
+import { Book } from '../types/search-book';
 import style from "../css/books.module.css"
 import Loading from './loading';
-import { Book } from '../types/search-book';
 
 export default function Search() {
   const { total, books } = useLoaderData() as { total: number, books: Book[] };
@@ -21,14 +21,19 @@ export default function Search() {
                 rel="noopener noreferrer"
                 className={style.bookLink}
               >
-                <strong className={style.bookTitle}>{book.title}</strong>
                 <div className={style.bookThumb}>
-                  <img src={book.image} alt="" className={style.bookThumbImg} />
+                  <img src={book.image} alt="" className={style.bookThumbImg} width={462.5} height={600} />
                 </div>
                 <div className={style.bookDetail}>
-                  <em className={style.price}>{book.discount}</em>
-                  <div className={style.author}>{book.author}</div>
-                  <div className={style.publisher}>{book.publisher}</div>
+                  <div className={style.bookInfo}>
+                    <strong className={style.bookTitle}>{book.title}</strong>
+                    <div className={style.author}>{book.author}</div>
+                    <div className={style.publisher}>{book.publisher}</div>
+                    <em className={style.price}>{book.discount}</em>
+                  </div>
+                  <div className={style.bookDescInfo}>
+                    <p className={style.description}>{book.description}</p>
+                  </div>
                 </div>
               </a>
             </li>

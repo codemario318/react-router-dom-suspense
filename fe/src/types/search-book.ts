@@ -42,11 +42,11 @@ export interface BookItem {
   link: string;
   image: string;
   author: string;
-  discount?: number;
+  discount?: string;
   publisher: string;
   isbn: string;
   description: string;
-  pubdate: Date;
+  pubdate: string;
 }
 
 export class Book {
@@ -66,10 +66,10 @@ export class Book {
     this._image = params.image;
     this._author = params.author;
     this._publisher = params.publisher;
-    this._discount = params.discount;
+    this._discount = parseInt(params.discount ?? '');
     this._isbn = params.isbn;
     this._description = params.description;
-    this._pubdate = params.pubdate;
+    this._pubdate = new Date(params.pubdate);
   }
 
   get title(): string {
@@ -89,7 +89,7 @@ export class Book {
   }
 
   get discount(): string {
-    return this._discount?.toLocaleString() ?? '판매 중지';
+    return this._discount?.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' }) ?? '판매 중지';
   }
 
   get publisher(): string {
@@ -105,6 +105,6 @@ export class Book {
   }
 
   get pubdate(): string {
-    return this._pubdate.toLocaleDateString();
+    return this._pubdate.toLocaleDateString('ko-KR');
   }
 }
