@@ -1,18 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client';
-import App from './routers/app';
+import Root from './routers/root';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { booksLoader } from "./loaders/books-loader";
 import "./css/index.css";
+
+import { booksLoader } from "./loaders/books-loader";
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-    loader: booksLoader
+    element: <Root />,
   }
 ]);
 
