@@ -1,5 +1,5 @@
 import { Form } from "react-router-dom";
-import style from "../css/search.module.css";
+import style from "@/css/search.module.css";
 
 export default function Search() {
   return (
